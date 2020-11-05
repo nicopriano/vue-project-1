@@ -4,7 +4,7 @@
     <div class="form-usuario">
       <input type="text" placeholder="Nombre" v-model="nombre"/>
       <input type="text" placeholder="Apellido" v-model="apellido"/>
-      <button @click="agregarUsario" type="button">Agregar</button>
+      <button type="button" @click="agregarUsuario">Agregar</button>
     </div>
     <div class="nombreActual" v-if="nombreCompleto !== ' '">
       {{ nombreCompleto }}
@@ -14,7 +14,6 @@
 </template>
 
 <script>
-// import { computed, reactive, ref, watch } from 'vue'
 import ListadoUsuarios from './components/ListadoUsuarios.vue'
 
 export default {
@@ -22,43 +21,6 @@ export default {
   components: {
     ListadoUsuarios
   },
-  // setup() {
-  //   const usuario = reactive({
-  //     nombre: 'Nicolas',
-  //     apellido: 'Priano'      
-  //   })
-
-  //   const listadoDeUsuarios = ref([]);
-
-  //   const nombreCompleto = computed(() => `${usuario.nombre} ${usuario.apellido}`);
-
-  //   const agregarUsuario = () => {
-  //     listadoDeUsuarios.value = [...listadoDeUsuarios.value, { nombre: usuario.nombre, apellido: usuario.apellido }];
-  //     usuario.nombre = '';
-  //     usuario.apellido = '';
-  //   }
-
-  //   const eliminarUsuario = usuario => {
-  //     listadoDeUsuarios.value = listadoDeUsuarios.value.filter(usr => usr.nombre !== usuario.nombre || usr.apellido !== usuario.apellido);
-  //   }
-
-  //   watch(listadoDeUsuarios, (currListadoDeUsuarios, prevListadoDeUsuarios) => {
-  //     if(currListadoDeUsuarios.length > prevListadoDeUsuarios.length) {
-  //       console.log(`Se agrego un usuario (${currListadoDeUsuarios.length} > ${prevListadoDeUsuarios.length})`);
-  //     } else {
-  //       console.log(`Se elimino un usuario (${currListadoDeUsuarios.length} < ${prevListadoDeUsuarios.length})`);
-  //     }
-  //   })
-
-  //   return {
-  //     usuario,
-  //     nombreCompleto,
-  //     agregarUsuario,
-  //     eliminarUsuario,
-  //     listadoDeUsuarios
-  //   }
-  // },
-  // options API
   data() {
     return  {
       nombre: 'Nicolas',
@@ -68,7 +30,6 @@ export default {
   },
   methods: {
     agregarUsuario() {
-      console.log('clicked')
       this.listadoDeUsuarios.push({
         nombre: this.nombre,
         apellido: this.apellido
