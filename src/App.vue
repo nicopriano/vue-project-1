@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { onMounted } from 'vue';
 // import { computed, reactive, ref, watch } from 'vue'
 import ListadoUsuarios from './components/ListadoUsuarios.vue'
 
@@ -22,83 +23,45 @@ export default {
   components: {
     ListadoUsuarios
   },
-  // setup() {
-  //   const usuario = reactive({
-  //     nombre: 'Nicolas',
-  //     apellido: 'Priano'      
-  //   })
-
-  //   const listadoDeUsuarios = ref([]);
-
-  //   const nombreCompleto = computed(() => `${usuario.nombre} ${usuario.apellido}`);
-
-  //   const agregarUsuario = () => {
-  //     listadoDeUsuarios.value = [...listadoDeUsuarios.value, { nombre: usuario.nombre, apellido: usuario.apellido }];
-  //     usuario.nombre = '';
-  //     usuario.apellido = '';
-  //   }
-
-  //   const eliminarUsuario = usuario => {
-  //     listadoDeUsuarios.value = listadoDeUsuarios.value.filter(usr => usr.nombre !== usuario.nombre || usr.apellido !== usuario.apellido);
-  //   }
-
-  //   watch(listadoDeUsuarios, (currListadoDeUsuarios, prevListadoDeUsuarios) => {
-  //     if(currListadoDeUsuarios.length > prevListadoDeUsuarios.length) {
-  //       console.log(`Se agrego un usuario (${currListadoDeUsuarios.length} > ${prevListadoDeUsuarios.length})`);
-  //     } else {
-  //       console.log(`Se elimino un usuario (${currListadoDeUsuarios.length} < ${prevListadoDeUsuarios.length})`);
-  //     }
-  //   })
-
-  //   return {
-  //     usuario,
-  //     nombreCompleto,
-  //     agregarUsuario,
-  //     eliminarUsuario,
-  //     listadoDeUsuarios
-  //   }
-  // },
-  // options API
-  data() {
-    return  {
+  setup() {
+    const usuario = reactive({
       nombre: 'Nicolas',
-      apellido: 'Priano',
-      listadoDeUsuarios: []
-    }
-  },
-  methods: {
-    agregarUsuario() {
-      console.log('clicked')
-      this.listadoDeUsuarios.push({
-        nombre: this.nombre,
-        apellido: this.apellido
-      });
-      this.nombre = ''
-      this.apellido = ''
-    },
-    eliminarUsuario() {
-      this.listadoDeUsuarios = this.listadoDeUsuarios.filter(usr => usr.nombre !== this.nombre || usr.apellido !== this.apellido);
-    }
-  },
-  computed: {
-    nombreCompleto: function () {
-      return `${this.nombre} ${this.apellido}`
-    },
-  },
-  watch: {
-    listadoDeUsuarios (currListadoDeUsuarios) {
-      if(currListadoDeUsuarios.length > this.listadoDeUsuarios.length) {
-        console.log(`Se agrego un usuario (${this.listadoDeUsuarios.length} > ${this.listadoDeUsuarios.length})`);
-      } else {
-        console.log(`Se elimino un usuario (${this.listadoDeUsuarios.length} < ${this.listadoDeUsuarios.length})`);
-      }
-    }
-  },
-  created() {
-    
-  },
-  mounted() {
+      apellido: 'Priano'      
+    })
 
+    const listadoDeUsuarios = ref([]);
+
+    const nombreCompleto = computed(() => `${usuario.nombre} ${usuario.apellido}`);
+
+    const agregarUsuario = () => {
+      listadoDeUsuarios.value = [...listadoDeUsuarios.value, { nombre: usuario.nombre, apellido: usuario.apellido }];
+      usuario.nombre = '';
+      usuario.apellido = '';
+    }
+
+    const eliminarUsuario = usuario => {
+      listadoDeUsuarios.value = listadoDeUsuarios.value.filter(usr => usr.nombre !== usuario.nombre || usr.apellido !== usuario.apellido);
+    }
+
+    watch(listadoDeUsuarios, (currListadoDeUsuarios, prevListadoDeUsuarios) => {
+      if(currListadoDeUsuarios.length > prevListadoDeUsuarios.length) {
+        console.log(`Se agrego un usuario (${currListadoDeUsuarios.length} > ${prevListadoDeUsuarios.length})`);
+      } else {
+        console.log(`Se elimino un usuario (${currListadoDeUsuarios.length} < ${prevListadoDeUsuarios.length})`);
+      }
+    })
+
+    onMounted(() => {
+      console.log('Mounted!')
+    })
+
+    return {
+      usuario,
+      nombreCompleto,
+      agregarUsuario,
+      eliminarUsuario,
+      listadoDeUsuarios
+    }
   }
 }
 </script>
