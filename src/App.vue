@@ -4,9 +4,9 @@
     <form class="form-usuario" @submit.prevent="agregarUsuario">
       <input type="text" placeholder="Nombre" v-model="usuario.nombre" ref="nombre"/>
       <input type="text" placeholder="Apellido" v-model="usuario.apellido" ref="apellido"/>
-      <button type="submit">Agregar</button>
+      <button type="submit" :disabled="nombreVacio">Agregar</button>
     </form>
-    <div class="nombreActual" v-if="nombreCompleto !== ' '">
+    <div class="nombreActual" v-if="!nombreVacio">
       {{ nombreCompleto }}
     </div>
     <ListadoUsuarios msg="Listado de usuarios" :usuarios="listadoDeUsuarios" @eliminar-usuario="eliminarUsuario"/>
@@ -32,10 +32,10 @@ export default {
   },
   methods: {
     agregarUsuario() {
-      this.listadoDeUsuarios.push({
+      this.listadoDeUsuarios = [...this.listadoDeUsuarios, {
         nombre: this.usuario.nombre,
         apellido: this.usuario.apellido
-      });
+      }];
       this.usuario.nombre = ''
       this.usuario.apellido = ''
 
@@ -49,13 +49,16 @@ export default {
     nombreCompleto: function () {
       return `${this.usuario.nombre} ${this.usuario.apellido}`
     },
+    nombreVacio: function () {
+      return this.nombreCompleto === ' '
+    }
   },
   watch: {
-    listadoDeUsuarios (currListadoDeUsuarios) {
-      if(currListadoDeUsuarios.length > this.listadoDeUsuarios.length) {
-        console.log(`Se agrego un usuario (${this.listadoDeUsuarios.length} > ${this.listadoDeUsuarios.length})`);
+    listadoDeUsuarios (currListadoDeUsuarios, oldListadoDeUsuarios) {
+      if(currListadoDeUsuarios.length > oldListadoDeUsuarios.length) {
+        console.log(`Se agrego un usuario (${currListadoDeUsuarios.length} > ${oldListadoDeUsuarios.length})`);
       } else {
-        console.log(`Se elimino un usuario (${this.listadoDeUsuarios.length} < ${this.listadoDeUsuarios.length})`);
+        console.log(`Se elimino un usuario (${currListadoDeUsuarios.length} < ${oldListadoDeUsuarios.length})`);
       }
     }
   },
