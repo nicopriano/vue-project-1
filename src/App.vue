@@ -2,8 +2,8 @@
   <img alt="Vue logo" src="./assets/logo.png">
   <main class="app-container">
     <form class="form-usuario" @submit.prevent="agregarUsuario">
-      <input type="text" placeholder="Nombre" v-model="usuario.nombre"/>
-      <input type="text" placeholder="Apellido" v-model="usuario.apellido"/>
+      <input type="text" placeholder="Nombre" v-model="usuario.nombre" ref="nombre"/>
+      <input type="text" placeholder="Apellido" v-model="usuario.apellido" ref="apellido"/>
       <button type="submit">Agregar</button>
     </form>
     <div class="nombreActual" v-if="nombreCompleto !== ' '">
@@ -38,6 +38,8 @@ export default {
       });
       this.usuario.nombre = ''
       this.usuario.apellido = ''
+
+      this.$refs.nombre.focus();
     },
     eliminarUsuario(usuario) {
       this.listadoDeUsuarios = this.listadoDeUsuarios.filter(usr => usr.nombre !== usuario.nombre || usr.apellido !== usuario.apellido);
