@@ -1,11 +1,11 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <main class="app-container">
-    <div class="form-usuario">
+    <form class="form-usuario" @submit.prevent="agregarUsuario">
       <input type="text" placeholder="Nombre" v-model="usuario.nombre"/>
       <input type="text" placeholder="Apellido" v-model="usuario.apellido"/>
-      <button type="button" @click="agregarUsuario">Agregar</button>
-    </div>
+      <button type="submit">Agregar</button>
+    </form>
     <div class="nombreActual" v-if="nombreCompleto !== ' '">
       {{ nombreCompleto }}
     </div>
