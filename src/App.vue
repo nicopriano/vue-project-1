@@ -23,8 +23,8 @@ export default {
   },
   data() {
     return  {
-      nombre: 'Nicolas',
-      apellido: 'Priano',
+      nombre: 'Pepe',
+      apellido: 'Sanchez',
       listadoDeUsuarios: []
     }
   },
@@ -60,7 +60,7 @@ export default {
   },
   mounted() {
 
-  }
+  },
 }
 </script>
 
