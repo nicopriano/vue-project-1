@@ -2,11 +2,11 @@
   <img alt="Vue logo" src="./assets/logo.png">
   <main class="app-container">
     <form class="form-usuario" @submit.prevent="agregarUsuario"><!-- Event Modifiers FTW -->
-      <input type="text" placeholder="Nombre" v-model="usuario.nombre"/>
+      <input type="text" placeholder="Nombre" v-model="usuario.nombre" ref="nombreRef"/>
       <input type="text" placeholder="Apellido" v-model="usuario.apellido"/>
-      <button type="submit" :disabled="noHayNombre">Agregar</button>
+      <button type="submit" :disabled="nombreVacio">Agregar</button>
     </form>
-    <div class="nombreActual" v-if="!noHayNombre">
+    <div class="nombreActual" v-if="!nombreVacio">
       {{ nombreCompleto }}
     </div>
     <ListadoUsuarios msg="Listado de usuarios" :usuarios="listadoDeUsuarios" @eliminar-usuario="eliminarUsuario"/>
@@ -29,14 +29,16 @@ export default {
     })
 
     const listadoDeUsuarios = ref([]);
+    const nombreRef = ref(null);
 
     const nombreCompleto = computed(() => `${usuario.nombre} ${usuario.apellido}`);
-    const noHayNombre = computed(() => !usuario.nombre && !usuario.apellido);
+    const nombreVacio = computed(() => !usuario.nombre && !usuario.apellido);
 
     const agregarUsuario = () => {
       listadoDeUsuarios.value = [...listadoDeUsuarios.value, { nombre: usuario.nombre, apellido: usuario.apellido }];
       usuario.nombre = '';
       usuario.apellido = '';
+      nombreRef.value.focus();
     }
 
     const eliminarUsuario = usuario => {
@@ -58,10 +60,11 @@ export default {
     return {
       usuario,
       nombreCompleto,
-      noHayNombre,
+      nombreVacio,
       agregarUsuario,
       eliminarUsuario,
       listadoDeUsuarios,
+      nombreRef,
     }
   }
 }
