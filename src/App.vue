@@ -24,8 +24,8 @@ export default {
   },
   setup() {
     const usuario = reactive({
-      nombre: 'Nicolas',
-      apellido: 'Priano'      
+      nombre: 'Pepe',
+      apellido: 'Sanchez'      
     })
 
     const listadoDeUsuarios = ref([]);
