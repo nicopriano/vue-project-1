@@ -34,4 +34,22 @@ export default {
   background-color: rgba(255, 20, 20, 0.3);
   padding: 15px;
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+
+.nombre-usuario {
+  background-color: #41b883;
+  border-radius: 5px;
+  color: white;
+  margin: 10px 0;
+  padding: 15px;
+}
+
+.nombre-usuario:hover {
+  background-color: rgba(255, 20, 20, 0.5);
+}
 </style>
