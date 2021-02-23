@@ -2,8 +2,8 @@
   <img alt="Vue logo" src="./assets/logo.png">
   <main class="app-container">
     <div class="form-usuario">
-      <input type="text" placeholder="Nombre" v-model="nombre"/>
-      <input type="text" placeholder="Apellido" v-model="apellido"/>
+      <input type="text" placeholder="Nombre" v-model="usuario.nombre"/>
+      <input type="text" placeholder="Apellido" v-model="usuario.apellido"/>
       <button type="button" @click="agregarUsuario">Agregar</button>
     </div>
     <div class="nombreActual" v-if="nombreCompleto !== ' '">
@@ -23,27 +23,29 @@ export default {
   },
   data() {
     return  {
-      nombre: 'Pepe',
-      apellido: 'Sanchez',
+      usuario: {
+        nombre: 'Pepe',
+        apellido: 'Sanchez',
+      },
       listadoDeUsuarios: []
     }
   },
   methods: {
     agregarUsuario() {
       this.listadoDeUsuarios.push({
-        nombre: this.nombre,
-        apellido: this.apellido
+        nombre: this.usuario.nombre,
+        apellido: this.usuario.apellido
       });
-      this.nombre = ''
-      this.apellido = ''
+      this.usuario.nombre = ''
+      this.usuario.apellido = ''
     },
-    eliminarUsuario() {
-      this.listadoDeUsuarios = this.listadoDeUsuarios.filter(usr => usr.nombre !== this.nombre || usr.apellido !== this.apellido);
+    eliminarUsuario(usuario) {
+      this.listadoDeUsuarios = this.listadoDeUsuarios.filter(usr => usr.nombre !== usuario.nombre || usr.apellido !== usuario.apellido);
     }
   },
   computed: {
     nombreCompleto: function () {
-      return `${this.nombre} ${this.apellido}`
+      return `${this.usuario.nombre} ${this.usuario.apellido}`
     },
   },
   watch: {
