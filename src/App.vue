@@ -56,10 +56,10 @@ export default {
     }
   },
   created() {
-    
+    console.log('Created!')
   },
   mounted() {
-
+    console.log('Mounted!')
   },
 }
 </script>
