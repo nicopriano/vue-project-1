@@ -8,17 +8,17 @@
     <div class="card-nombre">
      Nombre del producto va aca
     </div>
-    <ListadoUsuarios/>
+    <ListadoProductos/>
   </main>
 </template>
 
 <script>
-import ListadoUsuarios from './components/ListadoProductos.vue'
+import ListadoProductos from './components/ListadoProductos.vue'
 
 export default {
   name: 'App',
   components: {
-    ListadoUsuarios
+    ListadoProductos
   },
   data() {
     return  {
