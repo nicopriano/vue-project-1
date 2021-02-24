@@ -1,20 +1,19 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <main class="app-container">
-    <form class="form-usuario" @submit.prevent="agregarUsuario">
-      <input type="text" placeholder="Nombre" v-model="usuario.nombre" ref="nombre"/>
-      <input type="text" placeholder="Apellido" v-model="usuario.apellido" ref="apellido"/>
-      <button type="submit" :disabled="nombreVacio">Agregar</button>
+    <form class="form-carrito">
+      <input type="text" placeholder="Nombre del producto"/>
+      <button type="submit" disabled="true">Agregar</button>
     </form>
-    <div class="nombreActual" v-if="!nombreVacio">
-      {{ nombreCompleto }}
+    <div class="card-nombre">
+     Nombre del producto va aca
     </div>
-    <ListadoUsuarios msg="Listado de usuarios" :usuarios="listadoDeUsuarios" @eliminar-usuario="eliminarUsuario"/>
+    <ListadoUsuarios/>
   </main>
 </template>
 
 <script>
-import ListadoUsuarios from './components/ListadoUsuarios.vue'
+import ListadoUsuarios from './components/ListadoProductos.vue'
 
 export default {
   name: 'App',
@@ -23,44 +22,17 @@ export default {
   },
   data() {
     return  {
-      usuario: {
-        nombre: 'Pepe',
-        apellido: 'Sanchez',
-      },
-      listadoDeUsuarios: []
+      
     }
   },
   methods: {
-    agregarUsuario() {
-      this.listadoDeUsuarios = [...this.listadoDeUsuarios, {
-        nombre: this.usuario.nombre,
-        apellido: this.usuario.apellido
-      }];
-      this.usuario.nombre = ''
-      this.usuario.apellido = ''
 
-      this.$refs.nombre.focus();
-    },
-    eliminarUsuario(usuario) {
-      this.listadoDeUsuarios = this.listadoDeUsuarios.filter(usr => usr.nombre !== usuario.nombre || usr.apellido !== usuario.apellido);
-    }
   },
   computed: {
-    nombreCompleto: function () {
-      return `${this.usuario.nombre} ${this.usuario.apellido}`
-    },
-    nombreVacio: function () {
-      return this.nombreCompleto === ' '
-    }
+    
   },
   watch: {
-    listadoDeUsuarios (currListadoDeUsuarios, oldListadoDeUsuarios) {
-      if(currListadoDeUsuarios.length > oldListadoDeUsuarios.length) {
-        console.log(`Se agrego un usuario (${currListadoDeUsuarios.length} > ${oldListadoDeUsuarios.length})`);
-      } else {
-        console.log(`Se elimino un usuario (${currListadoDeUsuarios.length} < ${oldListadoDeUsuarios.length})`);
-      }
-    }
+    
   },
   created() {
     console.log('Created!')
@@ -81,7 +53,7 @@ export default {
   margin-top: 60px;
 }
 
-.nombreActual {
+.card-nombre {
   background-color: beige;
   border-radius: 5px;
   margin: 10px;
@@ -96,11 +68,11 @@ export default {
   align-items: center;
 }
 
-.form-usuario {
+.form-carrito {
   display: flex;
   flex-flow: row wrap;
 }
-.form-usuario input {
+.form-carrito input {
   border: 1px solid #cccccc;
   border-radius: 5px;
   font-size: 14px;
@@ -108,7 +80,7 @@ export default {
   padding: 10px;
 }
 
-.form-usuario button {
+.form-carrito button {
   border-radius: 5px;
   margin: 10px;
   padding: 10px;
