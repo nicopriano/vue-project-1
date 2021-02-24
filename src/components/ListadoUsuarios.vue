@@ -4,7 +4,7 @@
 
     <input type="text" class="filtro-usuario" v-model="filtro" placeholder="Filtrar usuarios...">
 
-    <ul v-if="usuarios.length">
+    <ul v-if="usuariosFiltrados.length">
       <li class="nombre-usuario" v-for="usuario in usuariosFiltrados" :key="usuario.apellido" @click="eliminarUsuario(usuario)">{{ usuario.nombre }} {{ usuario.apellido }}</li>
     </ul>
     <div v-else class="alert-sin-usuarios">No hay usuarios</div>
