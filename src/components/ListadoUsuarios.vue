@@ -2,8 +2,10 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
 
+    <input type="text" class="filtro-usuario" v-model="filtro" placeholder="Filtrar usuarios...">
+
     <ul v-if="usuarios.length">
-      <li class="nombre-usuario" v-for="usuario in usuarios" :key="usuario.apellido" @click="eliminarUsuario(usuario)">{{ usuario.nombre }} {{ usuario.apellido }}</li>
+      <li class="nombre-usuario" v-for="usuario in usuariosFiltrados" :key="usuario.apellido" @click="eliminarUsuario(usuario)">{{ usuario.nombre }} {{ usuario.apellido }}</li>
     </ul>
     <div v-else class="alert-sin-usuarios">No hay usuarios</div>
   </div>
@@ -18,6 +20,16 @@ export default {
       type: String,
     },
     usuarios: Array,
+  },
+  data() {
+    return {
+      filtro: '',
+    }
+  },
+  computed: {
+    usuariosFiltrados() {
+      return this.usuarios.filter(usr => usr.nombre.toLowerCase().includes(this.filtro.toLowerCase()) || usr.apellido.toLowerCase().includes(this.filtro.toLowerCase()))
+    }
   },
   methods: {
     eliminarUsuario(usuario) {
@@ -51,5 +63,13 @@ ul {
 
 .nombre-usuario:hover {
   background-color: rgba(255, 20, 20, 0.5);
+}
+
+.filtro-usuario {
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin: 10px;
+  padding: 10px;
 }
 </style>
